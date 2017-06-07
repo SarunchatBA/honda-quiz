@@ -15,10 +15,10 @@ namespace ApproveProject.Models
             {
                 return true;
             }
-            //else if (successor != null)
-            //{
-            //    successor.Approve(amount);
-            //}
+            else if (successor != null)
+            {
+                successor.Approve(amount);
+            }
             return false;
         }
     }
