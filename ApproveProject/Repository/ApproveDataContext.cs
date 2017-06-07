@@ -1,9 +1,32 @@
 namespace ApproveProject.Repository
 {
     using System;
+    using System.Collections.Generic;
     using System.ComponentModel;
     using System.Data.Entity;
     using System.Linq;
+
+    public class ApproveDBInitializer : DropCreateDatabaseAlways<ApproveCreditContext>
+    {
+        List<ApproveCredit> data = new List<ApproveCredit>();
+        public ApproveDBInitializer()
+        {
+            data.Add(new ApproveCredit { Seq = 1, Name= "Manager 1", Credit = 100000 });
+            data.Add(new ApproveCredit { Seq = 2, Name = "Manager 2", Credit = 200000 });
+            data.Add(new ApproveCredit { Seq = 3, Name = "Manager 3", Credit = 300000 });
+            data.Add(new ApproveCredit { Seq = 4, Name = "GM", Credit = 0 });
+        }
+        protected override void Seed(ApproveCreditContext context)
+        {
+            foreach (ApproveCredit p in data)
+            {
+                context.ApproveCredit.Add(p);
+            }
+            context.SaveChanges();
+            base.Seed(context);
+        }
+    }
+
 
     public class ApproveCreditContext : DbContext
     {
@@ -16,6 +39,7 @@ namespace ApproveProject.Repository
         public ApproveCreditContext()
             : base("name=ApproveDataContext")
         {
+            Database.SetInitializer<ApproveCreditContext>(new ApproveDBInitializer());
         }
 
         // Add a DbSet for each entity type that you want to include in your model. For more information 

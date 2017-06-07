@@ -138,7 +138,8 @@ namespace ApproveProject.Controllers
                 gm.Name = item.Name;
                 if (manager.Approve(approveCredit.Credit))
                 {
-                    transactionLog.Add(string.Format("{0} approved request of {1}", item.Name, approveCredit.Credit));
+                    transactionLog.Add(string.Format("Send to Successor {0}", item.Name));
+                    transactionLog.Add(string.Format("{0} approved request of {1} BHT", item.Name, approveCredit.Credit));
                     break;
                 }
                 else
